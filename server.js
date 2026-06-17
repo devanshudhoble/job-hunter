@@ -83,8 +83,10 @@ app.post('/api/apply', async (req, res) => {
     }
 
     try {
-        // Trigger Puppeteer auto apply script
-        autofillForm(link);
+        // Fire-and-forget with safe error handling — browser stays open for user
+        autofillForm(link).catch(err => {
+            database.addLog(`Auto-apply background error for ${title}: ${err.message}`, 'error');
+        });
         
         // Update job status in database
         const jobs = database.getJobs();
@@ -95,7 +97,7 @@ app.post('/api/apply', async (req, res) => {
             return j;
         });
         database.saveJobs(updated);
-        database.addLog(`Applying to: ${title} at ${company}. Headless browser opened.`, 'success');
+        database.addLog(`Applying to: ${title} at ${company}. Browser window opened.`, 'success');
 
         res.json({ success: true, message: `Autofill browser opened for ${title} at ${company}` });
     } catch (err) {
