@@ -1,0 +1,26 @@
+{
+  "name": "job-hunter-agent",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "scrape": "node -e \"const s = require('./scraper'); s.runScrapeCycle().then(() => process.exit(0));\""
+  },
+  "keywords": ["job-hunter", "ai-ml", "fresher", "auto-apply", "web-scraper", "puppeteer"],
+  "author": "Devanshu Dhoble <devanshudhoble32@gmail.com>",
+  "license": "MIT",
+  "description": "AI/ML Fresher Job Hunter & Auto-Apply Agent — Scrapes 15+ job portals hourly for AI, ML, Python & Data fresher openings with a premium dashboard and auto-apply automation.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devanshudhoble/job-hunter.git"
+  },
+  "dependencies": {
+    "axios": "^1.18.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "node-cron": "^4.3.0",
+    "puppeteer": "^25.1.0"
+  }
+}

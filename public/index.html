@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI/ML Job Hunter & Auto-Apply Agent</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="glow-bg-secondary"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <span class="logo-icon">🤖</span>
+                <h2>JobHunter<span class="gradient-text">.AI</span></h2>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="jobs-tab">
+                    <span class="icon">💼</span> Discover Jobs
+                </button>
+                <button class="nav-item" data-tab="profile-tab">
+                    <span class="icon">👤</span> My Profile
+                </button>
+                <button class="nav-item" data-tab="logs-tab">
+                    <span class="icon">💻</span> System Logs
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Agent Active</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="welcome-msg">
+                    <h1>Active Search Hub</h1>
+                    <p>Hourly scanning 15+ portals for AI/ML, Python & Data fresher jobs</p>
+                </div>
+                <div class="action-buttons">
+                    <button id="trigger-scrape-btn" class="btn primary-btn">
+                        <span class="btn-icon">🔄</span> Scan Now
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Bar -->
+            <section class="stats-container">
+                <div class="stat-card">
+                    <span class="stat-icon">🔍</span>
+                    <div class="stat-info">
+                        <h4 id="stat-total">0</h4>
+                        <p>Total Found</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">📥</span>
+                    <div class="stat-info">
+                        <h4 id="stat-unapplied">0</h4>
+                        <p>New / Pending</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🚀</span>
+                    <div class="stat-info">
+                        <h4 id="stat-applied">0</h4>
+                        <p>Applied</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⚡</span>
+                    <div class="stat-info">
+                        <h4 id="stat-avg-score">0%</h4>
+                        <p>Avg Match</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabs content -->
+            <div class="tab-content active" id="jobs-tab">
+                <!-- Filters Bar -->
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search by title, company, skills...">
+                    </div>
+                    <div class="filter-controls">
+                        <select id="portal-filter">
+                            <option value="">All Portals (15+)</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Indeed">Indeed</option>
+                            <option value="Naukri">Naukri</option>
+                            <option value="Internshala">Internshala</option>
+                            <option value="Unstop">Unstop</option>
+                            <option value="Wellfound">Wellfound (AngelList)</option>
+                            <option value="Cutshort">Cutshort</option>
+                            <option value="Instahyre">Instahyre</option>
+                            <option value="WeWorkRemotely">We Work Remotely</option>
+                            <option value="Remotive">Remotive</option>
+                            <option value="Freshersworld">Freshersworld</option>
+                            <option value="TimesJobs">TimesJobs</option>
+                            <option value="Glassdoor">Glassdoor</option>
+                            <option value="HackerEarth">HackerEarth</option>
+                            <option value="Shine">Shine.com</option>
+                        </select>
+                        <select id="score-filter">
+                            <option value="0">All Match Scores</option>
+                            <option value="80">High Match (>= 80%)</option>
+                            <option value="60">Medium Match (>= 60%)</option>
+                        </select>
+                        <select id="status-filter">
+                            <option value="">All Statuses</option>
+                            <option value="New">New / Found</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Ignored">Ignored</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Jobs list -->
+                <div class="jobs-list" id="jobs-list-container">
+                    <div class="loader">Loading job listings...</div>
+                </div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="tab-content" id="profile-tab">
+                <form id="profile-form" class="profile-editor">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="profile-name">Full Name</label>
+                            <input type="text" id="profile-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email Address</label>
+                            <input type="email" id="profile-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Phone Number</label>
+                            <input type="tel" id="profile-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-github">GitHub Profile</label>
+                            <input type="url" id="profile-github">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-linkedin">LinkedIn Profile</label>
+                            <input type="url" id="profile-linkedin">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-location">Location / Location Preference</label>
+                            <input type="text" id="profile-location">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-skills">Skills (Comma-separated)</label>
+                        <textarea id="profile-skills" rows="3" placeholder="Python, ML, TensorFlow, React..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-coverletter">Auto-Apply Cover Letter Template</label>
+                        <textarea id="profile-coverletter" rows="8" placeholder="Write cover letter pitch..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn success-btn">Save Profile Settings</button>
+                </form>
+            </div>
+
+            <!-- Logs Tab -->
+            <div class="tab-content" id="logs-tab">
+                <div class="logs-header">
+                    <h3>Scraper & Agent Execution Console</h3>
+                    <button id="clear-logs-btn" class="btn outline-btn" style="display:none;">Clear Logs</button>
+                </div>
+                <div class="logs-terminal" id="logs-container">
+                    <div class="log-line info">[System] Booting up active console monitor...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
